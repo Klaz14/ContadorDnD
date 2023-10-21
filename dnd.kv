@@ -1,0 +1,121 @@
+#:kivy 2.2.1
+
+<Menu>:
+    name: 'menu'
+    BoxLayout:
+        orientation: 'vertical'
+
+        Label:
+            text: 'Perfil'
+            font_size: '20sp'
+
+        Button:
+            text: 'Mostrar Perfil'
+            on_release: app.mostrar_perfil()
+
+        GridLayout:
+            cols: 2
+            spacing: 10
+
+            Button:
+                text: 'Vida'
+                on_release: app.menu_opcion('1')
+
+            Button:
+                text: 'CA'
+                on_release: app.menu_opcion('2')
+
+            Button:
+                text: 'Hechizos'
+                on_release: app.menu_opcion('3')
+
+            Button:
+                text: 'Criticos y Kills'
+                on_release: app.menu_opcion('4')
+
+            Button:
+                text: 'Subir de Nivel'
+                on_release: app.menu_opcion('5')
+
+            Button:
+                text: 'Eliminar PJ'
+                on_release: app.menu_opcion('6')
+
+            Button:
+                text: 'Cerrar App'
+                on_release: app.menu_opcion('7')
+
+    <SubMenu>:
+    name: 'submenu'
+    BoxLayout:
+        orientation: 'vertical'
+
+        Label:
+            text: 'Submenú'
+            font_size: '20sp'
+
+        Button:
+            text: 'Volver al Menú Principal'
+            on_release: app.menu_opcion('4')
+
+        GridLayout:
+            cols: 2
+            spacing: 10
+
+            Button:
+                text: 'Sumar Vida'
+                on_release: app.submenu_opcion('1')
+
+            Button:
+                text: 'Restar Vida'
+                on_release: app.submenu_opcion('2')
+
+            Button:
+                text: 'Resetear Vida'
+                on_release: app.submenu_opcion('3')
+
+    <SubMenuHechizos>:
+        name: 'submenu_hechizos'
+        BoxLayout:
+            orientation: 'vertical'
+
+            Label:
+                text: 'Submenú Hechizos'
+                font_size: '20sp'
+
+            Button:
+                text: 'Usos de Hechizos'
+                on_release: app.submenu_opcion('1')
+
+            Button:
+                text: 'Resetear Hechizos a Cantidad Base'
+                on_release: app.submenu_opcion('2')
+
+            Button:
+                text: 'Volver al Menú Principal'
+                on_release: app.submenu_opcion('3')
+
+    <SubMenuCritKill>:
+        name: 'submenu_crit_kill'
+        BoxLayout:
+            orientation: 'vertical'
+
+            Label:
+                text: 'Submenú Críticos y Kills'
+                font_size: '20sp'
+
+            Button:
+                text: 'Sumar un Crítico'
+                on_release: app.submenu_opcion('1')
+
+            Button:
+                text: 'Sumar una Kill'
+                on_release: app.submenu_opcion('2')
+
+            Button:
+                text: 'Mostrar Datos de Críticos y Kills Globales'
+                on_release: app.submenu_opcion('3')
+
+            Button:
+                text: 'Volver al Menú Principal'
+                on_release: app.submenu_opcion('4')
