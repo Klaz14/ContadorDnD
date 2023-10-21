@@ -1,9 +1,11 @@
 import os
+"""
 from kivy.app import App
 from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy.lang import Builder
 
 Builder.load_file("dnd.kv")
+"""
 
 class Perfil:
     @staticmethod
@@ -74,7 +76,6 @@ class Perfil:
             "¿Estás seguro que quieres reiniciar tu personaje? (1. Sí / 2. No): "
         )
         if opcion == "1":
-            # Eliminar los archivos .txt
             try:
                 os.remove(f"{perfil}_items.txt")
                 os.remove(f"{perfil}_consumibles.txt")
@@ -128,7 +129,7 @@ class GestorVIdaCA:
                 int(valor) for valor in archivo.readline().strip().split(",")
             ]
 
-        vida_temp = lineas_info[0]  # Obtener el valor de vida_temp
+        vida_temp = lineas_info[0]
 
         print(f"Tienes {vida_temp} de vida.")
 
@@ -139,18 +140,14 @@ class GestorVIdaCA:
                 int(valor) for valor in archivo.readline().strip().split(",")
             ]
 
-        vida_temp = lineas_info[0]  # Obtener el valor de vida_temp
+        vida_temp = lineas_info[0]
 
-        nueva_vida = Contador.sumar_cant(
-            vida_temp
-        )  # Pedir al usuario la cantidad a sumar y calcular la nueva vida
+        nueva_vida = Contador.sumar_cant(vida_temp)
 
-        lineas_info[0] = nueva_vida  # Actualizar el valor de vida_temp en la lista
+        lineas_info[0] = nueva_vida
 
         with open(f"{perfil}_info.txt", "w") as archivo:
-            archivo.write(
-                ",".join(map(str, lineas_info))
-            )  # Escribir las líneas actualizadas en el archivo
+            archivo.write(",".join(map(str, lineas_info)))
 
     @staticmethod
     def restar_vida(perfil):
@@ -159,18 +156,14 @@ class GestorVIdaCA:
                 int(valor) for valor in archivo.readline().strip().split(",")
             ]
 
-        vida_temp = lineas_info[0]  # Obtener el valor de vida_temp
+        vida_temp = lineas_info[0]
 
-        nueva_vida = Contador.restar_cant(
-            vida_temp
-        )  # Pedir al usuario la cantidad a restar y calcular la nueva vida
+        nueva_vida = Contador.restar_cant(vida_temp)
 
-        lineas_info[0] = nueva_vida  # Actualizar el valor de vida_temp en la lista
+        lineas_info[0] = nueva_vida
 
         with open(f"{perfil}_info.txt", "w") as archivo:
-            archivo.write(
-                ",".join(map(str, lineas_info))
-            )  # Escribir las líneas actualizadas en el archivo
+            archivo.write(",".join(map(str, lineas_info)))
 
     @staticmethod
     def reest_vida(perfil):
@@ -184,15 +177,13 @@ class GestorVIdaCA:
                 datos = linea.strip().split(",")
 
                 if datos[0] == perfil:
-                    vida = int(datos[3])  # Obtener el valor de vida desde perfiles.txt
+                    vida = int(datos[3])
                     break
 
-        lineas_info[0] = vida  # Actualizar el valor de vida_temp con el valor de vida
+        lineas_info[0] = vida
 
         with open(f"{perfil}_info.txt", "w") as archivo_info:
-            archivo_info.write(
-                ",".join(map(str, lineas_info))
-            )  # Escribir la línea actualizada en el archivo
+            archivo_info.write(",".join(map(str, lineas_info)))
 
     @staticmethod
     def mod_ca(perfil):
@@ -205,12 +196,12 @@ class GestorVIdaCA:
             datos = linea.strip().split(",")
 
             if datos[0] == perfil:
-                datos[4] = str(nueva_ca)  # Actualizar el valor de ca
+                datos[4] = str(nueva_ca)
 
-            lineas[i] = ",".join(datos)  # Actualizar la línea con el nuevo valor de ca
+            lineas[i] = ",".join(datos)
 
         with open("perfiles.txt", "w") as archivo:
-            archivo.writelines(lineas)  # Escribir las líneas actualizadas en el archivo
+            archivo.writelines(lineas)
 
         print(f"CA modificada correctamente, su nueva CA es de {nueva_ca}.")
 
@@ -352,7 +343,6 @@ class Items:
 class Varios:
     @staticmethod
     def cont_criticos(perfil):
-        # Obtener el contador de críticos y el daño actual del archivo _info.txt
         with open(f"{perfil}_info.txt", "r") as archivo_info:
             lineas_info = [
                 int(valor) for valor in archivo_info.readline().strip().split(",")
@@ -367,15 +357,14 @@ class Varios:
                 contador_kills,
             ) = lineas_info
 
-        # Incrementar el contador de críticos en 1
         contador_criticos += 1
         print(f"Felicidades por un critico mas! Con este ya van {contador_criticos}!")
-        # Preguntar por la cantidad de daño hecho
+
         daño += int(input("Por favor, introduce la cantidad de daño hecho: "))
         print(
             f"Demasiado daño! Con esto acumulas {daño} de vida quitada solo con criticos!"
         )
-        # Guardar los valores actualizados en el archivo _info.txt
+
         with open(f"{perfil}_info.txt", "w") as archivo_info:
             archivo_info.write(
                 f"{vida_temp},{nivel_1_temp},{nivel_2_temp},{nivel_3_temp},{contador_criticos},{daño}, {contador_kills}"
@@ -383,7 +372,6 @@ class Varios:
 
     @staticmethod
     def cont_kills(perfil):
-        # Obtener el contador de enemigos asesinados actual del archivo _info.txt
         with open(f"{perfil}_info.txt", "r") as archivo_info:
             lineas_info = [
                 int(valor) for valor in archivo_info.readline().strip().split(",")
@@ -398,13 +386,10 @@ class Varios:
                 contador_kills,
             ) = lineas_info
 
-        # Incrementar el contador de enemigos asesinados en 1
         contador_kills += 1
 
-        # Mostrar mensaje de felicidades por la kill
         print(f"Felicidades por tu nueva víctima! Con este ya van {contador_kills}!")
 
-        # Guardar los valores actualizados en el archivo _info.txt
         with open(f"{perfil}_info.txt", "w") as archivo_info:
             archivo_info.write(
                 f"{vida_temp},{nivel_1_temp},{nivel_2_temp},{nivel_3_temp},{contador_criticos},{daño},{contador_kills}"
@@ -412,14 +397,12 @@ class Varios:
 
     @staticmethod
     def mostrar_criticos_y_kills(perfil):
-        # Obtener los valores del archivo _info.txt
         with open(f"{perfil}_info.txt", "r") as archivo_info:
             lineas_info = [
                 int(valor) for valor in archivo_info.readline().strip().split(",")
             ]
             _, _, _, _, contador_criticos, daño, contador_kills = lineas_info
 
-        # Mostrar la información
         print(f"Cantidad de críticos hechos: {contador_criticos}")
         print(f"Cantidad de enemigos asesinados: {contador_kills}")
         print(f"Daño crítico total: {daño}")
@@ -455,16 +438,12 @@ class SubirNivel:
                 datos = linea.strip().split(",")
 
                 if datos[0] == perfil:
-                    datos[3] = str(nueva_vida)  # Actualizar el valor de vida
+                    datos[3] = str(nueva_vida)
 
-                lineas[i] = ",".join(
-                    datos
-                )  # Actualizar la línea con el nuevo valor de vida
+                lineas[i] = ",".join(datos)
 
             with open("perfiles.txt", "w") as archivo_perfiles:
-                archivo_perfiles.writelines(
-                    lineas
-                )  # Escribir las líneas actualizadas en el archivo
+                archivo_perfiles.writelines(lineas)
 
             print(f"¡Vida actualizada a {nueva_vida}!")
 
@@ -485,7 +464,6 @@ class SubirNivel:
                     print(f"Nivel 2: {datos[6]} hechizos")
                     print(f"Nivel 3: {datos[7]} hechizos")
 
-                    # Pedir al usuario la nueva cantidad de hechizos para cada nivel
                     nivel_1 = int(
                         input("Ingrese la nueva cantidad de hechizos de nivel 1: ")
                     )
@@ -496,16 +474,12 @@ class SubirNivel:
                         input("Ingrese la nueva cantidad de hechizos de nivel 3: ")
                     )
 
-                    # Actualizar la cantidad de hechizos en la lista de datos
                     datos[5] = str(nivel_1)
                     datos[6] = str(nivel_2)
                     datos[7] = str(nivel_3)
 
-                    lineas[i] = ",".join(
-                        datos
-                    )  # Actualizar la línea con los nuevos valores de hechizos
+                    lineas[i] = ",".join(datos)
 
-                    # Escribir las líneas actualizadas en el archivo
                     with open("perfiles.txt", "w") as archivo:
                         archivo.writelines(lineas)
 
